@@ -1,8 +1,10 @@
 # my-lib
-
+vue-cli3 的项目
 ## Project setup
 ```
-npm install
+npm install -g @vue/cli
+```
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
