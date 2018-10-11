@@ -13,7 +13,7 @@
 <script>
 import ScrollList from './list'
 import PullRefresh from './pull-refresh'
-import utils from '@/config/scroll'
+import * as utils from '@/config/scroll'
 export default {
   name: 'scroll',
   props: {
@@ -66,11 +66,12 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .no-data {
-  text-align: center
+  text-align: center;
+
   span {
-    line-height: 50px
-    vertical-align: middle
-    font-size: 13px
+    line-height: 50px;
+    vertical-align: middle;
+    font-size: 13px;
   }
 }
 </style>

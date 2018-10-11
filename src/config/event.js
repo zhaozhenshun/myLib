@@ -1,28 +1,28 @@
-import Vue from 'vue';
+import Vue from 'vue'
 const isServer = Vue.prototype.$isServer
-export let supportsPassive = false;
+export let supportsPassive = false
 if (!isServer) {
   try {
-    const opts = {};
+    const opts = {}
     Object.defineProperty(opts, 'passive', {
-      get() {
+      get () {
         /* istanbul ignore next */
-        supportsPassive = true;
+        supportsPassive = true
       }
-    });
-    window.addEventListener('test-passive', null, opts);
+    })
+    window.addEventListener('test-passive', null, opts)
   } catch (e) {}
 }
 
-export function on(target, event, handler, passive = false) {
+export function on (target, event, handler, passive = false) {
   !isServer &&
-    target.addEventListener(
-      event,
-      handler,
-      supportsPassive ? { capture: false, passive } : false
-    );
+  target.addEventListener(
+    event,
+    handler,
+    supportsPassive ? { capture: false, passive } : false
+  )
 }
 
-export function off(target, event, handler) {
-  !isServer && target.removeEventListener(event, handler);
+export function off (target, event, handler) {
+  !isServer && target.removeEventListener(event, handler)
 }

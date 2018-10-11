@@ -21,10 +21,10 @@
   </div>
 </template>
 <script>
-import Loading from '@/components/common/loading'
-import scrollUtils from '@/config/scroll'
+import Loading from "@/components/common/loading"
+import * as scrollUtils from "@/config/scroll"
 export default {
-  name: 'pull-refresh',
+  name: "pull-refresh",
   components: {
     Loading
   },
@@ -32,15 +32,15 @@ export default {
     disabled: Boolean,
     pullingText: {
       type: String,
-      default: '下拉即可刷新...'
+      default: "下拉即可刷新..."
     },
     loosingText: {
       type: String,
-      default: '释放即可刷新...'
+      default: "释放即可刷新..."
     },
     loadingText: {
       type: String,
-      default: '加载中...'
+      default: "加载中..."
     },
     value: {
       type: Boolean,
@@ -57,7 +57,7 @@ export default {
   },
   data () {
     return {
-      status: 'normal',
+      status: "normal",
       height: 0,
       duration: 0
     };
@@ -71,7 +71,7 @@ export default {
     },
 
     untouchable () {
-      return this.status === 'loading' || this.disabled;
+      return this.status === "loading" || this.disabled;
     }
   },
   watch: {
@@ -104,7 +104,7 @@ export default {
       }
 
       if (this.ceiling && this.deltaY >= 0) {
-        if (this.direction === 'vertical') {
+        if (this.direction === "vertical") {
           this.getStatus(this.ease(this.deltaY));
           event.preventDefault();
         }
@@ -117,10 +117,10 @@ export default {
 
       if (this.ceiling && this.deltaY) {
         this.duration = this.animationDuration;
-        if (this.status === 'loosing') {
+        if (this.status === "loosing") {
           this.getStatus(this.headHeight, true);
-          this.$emit('input', true);
-          this.$emit('refresh');
+          this.$emit("input", true);
+          this.$emit("refresh");
         } else {
           this.getStatus(0);
         }
@@ -128,8 +128,8 @@ export default {
     },
     // 是否顶部
     getCeiling () {
-      this.ceiling = scrollUtils.getScrollTop(this.scrollEl) === 0
-      return this.ceiling
+      this.ceiling = scrollUtils.getScrollTop(this.scrollEl) === 0;
+      return this.ceiling;
     },
     ease (height) {
       const { headHeight } = this;
@@ -144,16 +144,17 @@ export default {
       this.height = height;
 
       const status = isLoading
-        ? 'loading' : height === 0
-          ? 'normal' : height < this.headHeight
-            ? 'pulling' : 'loosing';
+        ? "loading"
+        : height === 0
+          ? "normal"
+          : height < this.headHeight ? "pulling" : "loosing";
 
       if (status !== this.status) {
         this.status = status;
       }
     },
     touchStart (event) {
-      this.direction = '';
+      this.direction = "";
       this.deltaX = 0;
       this.deltaY = 0;
       this.offsetX = 0;
@@ -168,22 +169,27 @@ export default {
       this.deltaY = touch.clientY - this.startY;
       this.offsetX = Math.abs(this.deltaX);
       this.offsetY = Math.abs(this.deltaY);
-      this.direction = this.offsetX > this.offsetY ? 'horizontal' : this.offsetX < this.offsetY ? 'vertical' : '';
+      this.direction =
+        this.offsetX > this.offsetY
+          ? "horizontal"
+          : this.offsetX < this.offsetY ? "vertical" : "";
     }
   },
   mounted () {
     this.scrollEl = scrollUtils.getScrollEventTarget(this.$el);
   }
-}
+};
 </script>
 <style lang="stylus" scoped>
 .pull-refresh {
   user-select: none
   overflow: hidden
+
   // height: 100%
   .track {
     position: relative
   }
+
   .head {
     width: 100%
     height: 50px
@@ -196,6 +202,7 @@ export default {
     // color: $gray-dark
     line-height: 50px
   }
+
   .pull-loading {
     span {
       font-size: 13px
@@ -204,16 +211,19 @@ export default {
       vertical-align: middle
       display: inline-block
     }
+
     /deep/ .loading {
       line-height: 50px
       vertical-align: middle
       margin-right: 0.5rem
     }
   }
+
   .text {
     display: block
   }
 }
+
 >>> .loading {
   display: inline-block
 }

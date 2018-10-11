@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import utils from '@/config/scroll'
+import * as utils from '@/config/scroll'
 import Loading from '@/components/common/loading'
 import { on, off } from '@/config/event'
 export default {
@@ -119,19 +119,22 @@ export default {
 <style lang="stylus" scoped>
 .list {
   .list__loading {
-    text-align: center
+    text-align: center;
   }
+
   .list__loading .loading, .list__loading-text {
-    display: inline-block
-    vertical-align: middle
+    display: inline-block;
+    vertical-align: middle;
   }
+
   .list__loading .loading {
-    margin-right: 0.5rem
+    margin-right: 0.5rem;
   }
+
   .list__loading-text {
-    font-size: 13px
-    color: #999
-    line-height: 50px
+    font-size: 13px;
+    color: #999;
+    line-height: 50px;
   }
 }
 </style>
