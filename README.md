@@ -1,4 +1,5 @@
 # my-lib
+![Travis (.org)](https://img.shields.io/travis/:user/:repo.svg)
 vue-cli3 的项目
 ## Project setup
 ```
