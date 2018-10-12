@@ -34,3 +34,64 @@ function merageOption (option) {
   option.overlayStyle = option.mask
   return option
 }
+
+function Toast (option = {}) {
+  const instance = createInstance()
+  option = {
+    ...currentOptions,
+    ...parseOption(Option),
+    clear () {
+      instance.value = false
+    }
+  }
+  Object.assign(instance, merageOption(option))
+  clearTimeout(instance.timer)
+
+  if (option.duration > 0) {
+    instance.timer = setTimeout(() => {
+      instance.clear()
+    }, option.duration)
+  }
+  return instance
+}
+
+Toast.clear = function (all) {
+  if (queue.length) {
+    if (all) {
+      queue.forEach((item) => {
+        item.clear()
+      })
+      queue = []
+    } else if (singleton) {
+      queue[0].clear()
+    } else {
+      queue.shift().clear()
+    }
+  }
+}
+
+const createMethod = type => options => Toast({ type, ...parseOption(options) });
+
+['loading'].forEach(method => {
+  Toast[method] = createMethod(method);
+})
+
+Toast.setDefaultOptions = options => {
+  Object.assign(currentOptions, options)
+}
+
+Toast.restDefaultOptions = () => {
+  Object.assign(currentOptions, defaultOption)
+}
+
+Toast.allowMultiple = (allow = true) => {
+  singleton = !allow
+}
+
+Toast.install = () => {
+  Vue.use(VueToast)
+}
+
+Vue.prototype.$toast = Toast
+
+export default Toast

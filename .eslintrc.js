@@ -10,7 +10,8 @@ module.exports = {
   rules: {
     'no-debugger': 'error',
     'semi': 0,
-    'quotes': 0
+    'quotes': 0,
+    'camelcase': 0
   },
   parserOptions: {
     parser: 'babel-eslint'

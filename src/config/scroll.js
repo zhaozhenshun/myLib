@@ -8,7 +8,7 @@ export const getScrollEventTarget = (element, rootParent = window) => {
     currentNode.nodeType === 1 &&
     currentNode !== rootParent
   ) {
-    const overflowY = this.getComputedStyle(currentNode).overflowY
+    const overflowY = getComputedStyle(currentNode).overflowY
     if (overflowY === 'scroll' || overflowY === 'auto') {
       return currentNode
     }
@@ -30,7 +30,7 @@ export const setScrollTop = (element, value) => {
 export const getElementTop = (element) => {
   return (
     (element === window ? 0 : element.getBoundingClientRect().top) +
-    this.getScrollTop(window)
+    getScrollTop(window)
   )
 }
 
